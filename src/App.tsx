@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Button} from "./components/Button";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+/*    const onClickHandler = (name: string) => {
+        console.log(name)
+    }*/
+
+
+const Button1Foo = (subscriber: string, age: number, address: string) => {
+    console.log(subscriber, age, address)
 }
+const Button2Foo = (subscriber: string) => {
+    console.log(subscriber)
+}
+const Button3Foo = () => {
+    console.log("I am stupid Button")
+}
+
+    return (
+        <div className={"App"}>
+            <Button name={"MyYouTubeChannel-1"} callBack={()=>Button1Foo("I'm Vasya", 21, "live in Minsk")}/>
+            <Button name={"MyYouTubeChannel-2"} callBack={()=>Button2Foo("I'm Ivan")}/>
+            <Button name={"Stupid"} callBack={Button3Foo}/>
+
+
+{/*            <button onClick={(event) => onClickHandler("Vasya")}>MyYouTubeChannel-2</button>
+            <button onClick={(event) => onClickHandler("Ivan")}>MyYouTubeChannel-3</button>*/}
+        </div>
+    );
+}
+
 
 export default App;
