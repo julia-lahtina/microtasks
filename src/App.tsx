@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Button} from "./components/Button";
+import {UseState} from "./components/UseState";
 
 
 function App() {
@@ -25,6 +26,8 @@ const Button3Foo = () => {
             <Button name={"MyYouTubeChannel-1"} callBack={()=>Button1Foo("I'm Vasya", 21, "live in Minsk")}/>
             <Button name={"MyYouTubeChannel-2"} callBack={()=>Button2Foo("I'm Ivan")}/>
             <Button name={"Stupid"} callBack={Button3Foo}/>
+
+            <UseState/>
 
 
 {/*            <button onClick={(event) => onClickHandler("Vasya")}>MyYouTubeChannel-2</button>
