@@ -19,9 +19,15 @@ function App() {
     ])
 
     let [title, setTitle] = useState("")
+    console.log(title)
     const addMessage = (title: string) => {
         let newMessage = {message: title};
         setMessage([newMessage, ...message])
+    }
+
+    const callBackButtonHandler = () => {
+        addMessage(title)
+        setTitle("")
     }
 
     /*    const onClickHandler = (name: string) => {
@@ -76,8 +82,7 @@ function App() {
         <div className={"App"}>
             {/* <FullInput addMessage={addMessage}/>*/}
             <Input setTitle={setTitle} title={title}/>
-            <Button2 name={"+"} callBack={() => {
-            }}/>
+            <Button2 name={"+"} callBack={callBackButtonHandler}/>
             {message.map((el, index) => {
                 return (
                     <div key={index}>{el.message}</div>
