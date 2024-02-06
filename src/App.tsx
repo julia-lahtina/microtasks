@@ -16,6 +16,10 @@ function App() {
         {message: "message3"},
     ])
 
+    const addMessage = () => {
+        console.log("aaaaaaaa")
+    }
+
     /*    const onClickHandler = (name: string) => {
             console.log(name)
         }*/
@@ -66,7 +70,7 @@ function App() {
     return (
 
         <div className={"App"}>
-            <FullInput/>
+            <FullInput addMessage={addMessage()}/>
             {message.map((el, index) => {
                 return (
                     <div key={index}>{el.message}</div>
