@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
+import {FullInput} from "./components/FullInput";
 /*import {Button} from "./components/Button";
 import {UseState} from "./components/UseState";
 import {Map} from "./components/Map";
@@ -65,10 +66,7 @@ function App() {
     return (
 
         <div className={"App"}>
-            <div>
-                <input type="text"/>
-                <button>+</button>
-            </div>
+            <FullInput/>
             {message.map((el, index) => {
                 return (
                     <div key={index}>{el.message}</div>
