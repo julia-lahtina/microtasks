@@ -1,116 +1,203 @@
 import React, {useState} from 'react';
 import './App.css';
-import {FullInput} from "./components/FullInput";
-import {Input} from "./components/Input";
-import {Button2} from "./components/Button2";
-/*import {Button} from "./components/Button";
-import {UseState} from "./components/UseState";
-import {Map} from "./components/Map";
-import {CurrentMoneyType, Filter, MoneyType} from "./components/Filter";*/
+import {Todolist} from './Todolist';
+import {v1} from 'uuid';
 
-export type FilterType = "all" | "dollar" | "ruble"
+
+type ObjectType = {
+    title: string
+    filter: FilterValuesType
+    tasks: Array<TasksType>
+    students: Array<string>
+}
+export type TasksType = {
+    taskId: string
+    title: string
+    isDone: boolean
+}
+
+export type FilterValuesType = "all" | "active" | "completed";
+
 
 function App() {
 
-    let [message, setMessage] = useState([
-        {message: "message1"},
-        {message: "message2"},
-        {message: "message3"},
+    const [todo, setTodo] = useState<Array<ObjectType>>([
+        {
+            title: "What to learn",
+            filter: "all",
+            tasks: [
+                {taskId: v1(), title: "HTML&CSS", isDone: true},
+                {taskId: v1(), title: "JS", isDone: true}
+            ],
+            students: [
+                'Rick Kane',
+                'Finnlay Bentley',
+                'Samia North',
+                'Isaac Morton',
+                'Lily-Ann Clifford',
+                'Thalia Park',
+                'Sapphire Cruz',
+                'Cieran Vazquez',
+                'Anya Estes',
+                'Dominika Field',
+                'Rosanna Chung',
+                'Safiyah Davey',
+                'Ryley Beasley',
+                'Kalvin Trejo',
+                'Evie-Mae Farrell',
+                'Juliet Valencia',
+                'Astrid Austin',
+                'Lyle Montgomery',
+                'Nisha Mora',
+                'Kylie Callaghan',
+                'Star Wilks',
+                'Marissa Colley',
+                'Asa Fuller',
+                'Leigh Kemp',
+                'Avleen Dawson',
+                'Sammy Bonilla',
+                'Acacia Becker',
+                'Coral Shepherd',
+                'Melina Molina',
+                'Kiran Bailey',
+                'Clara Escobar',
+                'Alexandru Horn',
+                'Brandon-Lee Mercado',
+                'Elouise Weston',
+                'King Long',
+                'Kerri Searle',
+                'Kanye Hamer',
+                'Elwood Benitez',
+                'Mikail Whitaker',
+                'Bobby Hardy',
+                'Talha Ferry',
+                'Priscilla Landry',
+                'Olivia-Grace Cain',
+                'Kiaan Wallace',
+                'Wesley Padilla90',
+                'Ella-Grace Wooten91',
+                'Kaif Molloy92',
+                'Kamal Broadhurst93',
+                'Bianca Ferrell94',
+                'Micheal Talbot95',
+            ]
+        },
+        {
+            title: "What to do",
+            filter: "all",
+            tasks: [
+                {taskId: v1(), title: "HTML&CSS2", isDone: true},
+                {taskId: v1(), title: "JS2", isDone: true}
+            ],
+            students: [
+                'Jago Wormald1',
+                'Saul Milne2',
+                'Aariz Hester3',
+                'Dion Reeve4',
+                'Anisa Ortega5',
+                'Blade Cisneros6',
+                'Malaikah Phelps7',
+                'Zeeshan Gallagher8',
+                'Isobella Vo9',
+                'Rizwan Mathis10',
+                'Menaal Leach11',
+                'Kian Walton12',
+                'Orion Lamb13',
+                'Faizah Huynh14',
+                'Crystal Vaughan15',
+                'Vivien Hickman16',
+                'Stuart Lu17',
+                'Karol Davison18',
+                'Dario Burns19',
+                'Chloe Rich20',
+                'Martyna Felix',
+                'Nida Glass',
+                'Maeve Miles',
+                'Hasnain Puckett',
+                'Ayman Cano',
+                'Safwan Perry',
+                'Fox Kelly',
+                'Louise Barlow',
+                'Malaki Mcgill',
+                'Leanna Cline',
+                'Willard Hodge',
+                'Amelia Dorsey',
+                'Kiah Porter',
+                'Jeanne Daly',
+                'Mohsin Armstrong',
+                'Laurie Rangel',
+                'Princess Tierney',
+                'Kasim Kendall',
+                'Darryl Cope',
+                'Elysha Ray',
+                'Liyana Harris',
+                'Kashif Blackburn',
+                'Atif Zimmerman',
+                'Sila Hartley',
+                'Ralphie Hebert',
+            ]
+        }
     ])
 
-    let [title, setTitle] = useState("")
-    console.log(title)
-    const addMessage = (title: string) => {
-        let newMessage = {message: title};
-        setMessage([newMessage, ...message])
+    function removeTask(taskId: string, todolistId: number) {
+        setTodo(todo.map((el, index) => index === todolistId ? {
+            ...el,
+            tasks: [...el.tasks.filter(fl => fl.taskId !== taskId)]
+        } : el))
     }
 
-    const callBackButtonHandler = () => {
-        addMessage(title)
-        setTitle("")
+    function addTask(title: string, todolistId: number) {
+        let newTask: TasksType = {taskId: v1(), title: title, isDone: false};
+        setTodo(todo.map((el, index) => index === todolistId ? {...el, tasks: [newTask, ...el.tasks]} : el))
     }
 
-    /*    const onClickHandler = (name: string) => {
-            console.log(name)
-        }*/
+    function changeStatus(taskId: string, isDone: boolean, todolistId: number) {
+        setTodo(todo.map((el, index) => index === todolistId ? {
+            ...el,
+            tasks: el.tasks.map(m => m.taskId === taskId ? {...m, isDone: isDone} : m)
+        } : el))
+    }
 
-    /*    const Button1Foo = (subscriber: string, age: number, address: string) => {
-            console.log(subscriber, age, address)
-        }
-        const Button2Foo = (subscriber: string) => {
-            console.log(subscriber)
-        }
-        const Button3Foo = () => {
-            console.log("I am stupid Button")
-        }
+    function changeFilter(value: FilterValuesType, todolistId: number) {
+        setTodo(todo.map((el, index) => index === todolistId ? {...el, filter: value} : el))
+    }
 
-        const books = [
-            {id: 1, type: "roman", author: "Van de Kamp", published: 2022},
-            {id: 2, type: "horror", author: "King", published: 1995},
-            {id: 3, type: "roman", author: "Dostoevski", published: 2010},
-        ]*/
-
-    /*    const [money, setMoney] = useState([
-            {banknote: "dollar", nominal: 100, number: "a123456789"},
-            {banknote: "dollar", nominal: 50, number: "b123456789"},
-            {banknote: "ruble", nominal: 100, number: "c123456789"},
-            {banknote: "dollar", nominal: 100, number: "d123456789"},
-            {banknote: "dollar", nominal: 50, number: "e123456789"},
-            {banknote: "ruble", nominal: 100, number: "f123456789"},
-            {banknote: "dollar", nominal: 50, number: "j123456789"},
-            {banknote: "ruble", nominal: 50, number: "h123456789"},
-        ])
-
-        const [filter, setFilter] = useState<FilterType>("all")
-
-
-        let currentMoney = money;
-
-        if (filter === "ruble") {
-            currentMoney = money.filter(filteredMoney => filteredMoney.banknote === "ruble")
-        }
-
-        if (filter === "dollar") {
-            currentMoney = money.filter(filteredMoney => filteredMoney.banknote === "dollar")
-        }
-        const onClickFilterHandler = (nameButton: FilterType) => {
-            setFilter(nameButton)
-        }*/
+    function removeTodolist(todolistId: number) {
+        setTodo(todo.filter((el, index) => index !== todolistId))
+    }
 
     return (
+        <div className="App">
+            {
+                todo.map((tl, index) => {
+                    let allTodolistTasks = tl.tasks;
+                    let tasksForTodolist = allTodolistTasks;
 
-        <div className={"App"}>
-            {/* <FullInput addMessage={addMessage}/>*/}
-            <Input setTitle={setTitle} title={title}/>
-            <Button2 name={"+"} callBack={callBackButtonHandler}/>
-            {message.map((el, index) => {
-                return (
-                    <div key={index}>{el.message}</div>
-                )
-            })}
+                    if (tl.filter === "active") {
+                        tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false);
+                    }
+                    if (tl.filter === "completed") {
+                        tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true);
+                    }
+
+                    return <Todolist
+                        key={index}
+                        id={index}
+                        title={tl.title}
+                        tasks={tasksForTodolist}
+                        students={tl.students}
+                        removeTask={removeTask}
+                        changeFilter={changeFilter}
+                        addTask={addTask}
+                        changeTaskStatus={changeStatus}
+                        filter={tl.filter}
+                        removeTodolist={removeTodolist}
+                    />
+                })
+            }
+
         </div>
-
-
-
-        /*
-
-                  {/!*  <Filter currentMoney={currentMoney} onClickFilterHandler={onClickFilterHandler}/>*!/}
-
-
-                /!*                            <Button name={"MyYouTubeChannel-1"} callBack={() => Button1Foo("I'm Vasya", 21, "live in Minsk")}/>
-                            <Button name={"MyYouTubeChannel-2"} callBack={() => Button2Foo("I'm Ivan")}/>
-                            <Button name={"Stupid"} callBack={Button3Foo}/>
-
-                            <UseState/>
-                            <Map books={books}/>
-
-
-                                            <button onClick={(event) => onClickHandler("Vasya")}>MyYouTubeChannel-2</button>
-                            <button onClick={(event) => onClickHandler("Ivan")}>MyYouTubeChannel-3</button>*!/
-        */
-
-
-    )
+    );
 }
 
 export default App;
