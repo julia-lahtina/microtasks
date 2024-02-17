@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import './App.css';
 import {json} from 'node:stream/consumers';
+import {Button} from './components/Button';
 
 type TodosType = {
     userId: number
@@ -13,11 +14,15 @@ function App() {
 
     const [todos, setTodos] = useState<TodosType[]>([])
 
-    /*    useEffect(() => {
-            fetch('https://jsonplaceholder.typicode.com/todos')
-                .then(response => response.json())
-                .then(json => setTodos(json))
-        }, []) */ //-------> если в [] положить todos, useEffect будет следить за переменной todos, если в ней произошло 5 изменений, useEffect 5 раз запустится, отрисуется
+    const fetschTodos = () => {
+        fetch('https://jsonplaceholder.typicode.com/todos')
+            .then(response => response.json())
+            .then(json => setTodos(json))
+    }
+
+    useEffect(() => {
+        fetschTodos()
+    }, [])  //-------> если в [] положить todos, useEffect будет следить за переменной todos, если в ней произошло 5 изменений, useEffect 5 раз запустится, отрисуется
 
     //очень часто useEffect работет в связке с useState
 
@@ -25,9 +30,7 @@ function App() {
 
 
     const showHandler = () => {
-        fetch('https://jsonplaceholder.typicode.com/todos')
-            .then(response => response.json())
-            .then(json => setTodos(json))
+        fetschTodos()
     }
 
     const hideHandler = () => {
@@ -37,8 +40,10 @@ function App() {
     return (
         <div className="App">
             <div>
-                <button onClick={showHandler}>Show me todos</button>
-                <button onClick={hideHandler}>Hide me todos</button>
+                <Button title={'Show me todos'} onClick={showHandler}/>
+                <Button title={'Hide me todos'} onClick={hideHandler}/>
+{/*                <button onClick={showHandler}>Show me todos</button>
+                <button onClick={hideHandler}>Hide me todos</button>*/}
             </div>
             <ul>
                 {todos.map((el: TodosType, index) => {
