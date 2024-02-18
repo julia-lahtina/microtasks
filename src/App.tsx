@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useRef, useState} from 'react';
 import './App.css';
 import {json} from 'node:stream/consumers';
 import {Button} from './components/Button';
@@ -14,8 +14,12 @@ type TodosType = {
 function App() {
 
     const [todos, setTodos] = useState<TodosType[]>([])
-    const [newTitle, setNewTitle] = useState('')
 
+    console.log(todos)
+
+    /*    const [newTitle, setNewTitle] = useState('')*/
+
+    const newTitle = useRef<HTMLInputElement>(null) //local state useRef
 
 
     const fetschTodos = () => {
@@ -25,12 +29,11 @@ function App() {
     }
 
     useEffect(() => {
+        console.log('vse propalo')
         fetschTodos()
     }, [])  //-------> если в [] положить todos, useEffect будет следить за переменной todos, если в ней произошло 5 изменений, useEffect 5 раз запустится, отрисуется
 
     //очень часто useEffect работет в связке с useState
-
-    console.log(todos)
 
 
     const showHandler = () => {
@@ -43,13 +46,16 @@ function App() {
 
 
     const addMessage = () => {
-        const newMessage = {
-            userId: 666,
-            id: todos.length+1,
-            title: newTitle,
-            completed: true
+        if (newTitle.current) {
+            const newMessage = {
+                userId: 666,
+                id: todos.length + 1,
+                title: newTitle.current.value,
+                completed: true
+            }
+            setTodos([...todos, newMessage])
+            newTitle.current.value = ''
         }
-        setTodos([...todos, newMessage])
     }
 
 
@@ -59,16 +65,14 @@ function App() {
                 <div>
                     <Input
                         newTitle={newTitle}
-                        setNewTitle={setNewTitle}
-/*                        value={''}
-                        callBack={() => {}}*/
+                        //setNewTitle={setNewTitle}
                     />
                     <Button title={'ADD'} onClick={addMessage}/>
                 </div>
 
                 <Button title={'Show me todos'} onClick={showHandler}/>
                 <Button title={'Hide me todos'} onClick={hideHandler}/>
-{/*                <button onClick={showHandler}>Show me todos</button>
+                {/*                <button onClick={showHandler}>Show me todos</button>
                 <button onClick={hideHandler}>Hide me todos</button>*/}
             </div>
             <ul>
