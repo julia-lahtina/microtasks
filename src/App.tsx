@@ -45,11 +45,11 @@ function App() {
     const addMessage = () => {
         const newMessage = {
             userId: 666,
-            id: 201,
+            id: todos.length+1,
             title: newTitle,
             completed: true
         }
-        setTodos([newMessage, ...todos])
+        setTodos([...todos, newMessage])
     }
 
 
