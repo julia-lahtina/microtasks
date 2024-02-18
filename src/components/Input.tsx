@@ -1,15 +1,18 @@
 import React, {ChangeEvent} from 'react';
 
-type InputPropsType = {
-    setTitle: (title: string) => void
-    title: string
+export type InputType = {
+/*    value: string
+    callBack: (value: string) => void*/
+    newTitle: string
+    setNewTitle: (newTitle: string) => void
 }
-export const Input = (props: InputPropsType) => {
-    const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        props.setTitle(event.currentTarget.value)
+export const Input = (props: InputType) => {
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+       props.setNewTitle(e.currentTarget.value)
     }
 
     return (
-        <input value={props.title} onChange={onChangeInputHandler} type="text"/>
+        <input onChange={onChangeHandler} value={props.newTitle} type="text"/>
     );
 };
