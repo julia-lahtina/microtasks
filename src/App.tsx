@@ -2,6 +2,7 @@ import React, {Fragment, useEffect, useState} from 'react';
 import './App.css';
 import {json} from 'node:stream/consumers';
 import {Button} from './components/Button';
+import {Input} from './components/Input';
 
 type TodosType = {
     userId: number
@@ -13,6 +14,9 @@ type TodosType = {
 function App() {
 
     const [todos, setTodos] = useState<TodosType[]>([])
+    const [newTitle, setNewTitle] = useState('')
+
+
 
     const fetschTodos = () => {
         fetch('https://jsonplaceholder.typicode.com/todos')
@@ -37,9 +41,31 @@ function App() {
         setTodos([])
     }
 
+
+    const addMessage = () => {
+        const newMessage = {
+            userId: 666,
+            id: 201,
+            title: newTitle,
+            completed: true
+        }
+        setTodos([newMessage, ...todos])
+    }
+
+
     return (
         <div className="App">
             <div>
+                <div>
+                    <Input
+                        newTitle={newTitle}
+                        setNewTitle={setNewTitle}
+/*                        value={''}
+                        callBack={() => {}}*/
+                    />
+                    <Button title={'ADD'} onClick={addMessage}/>
+                </div>
+
                 <Button title={'Show me todos'} onClick={showHandler}/>
                 <Button title={'Hide me todos'} onClick={hideHandler}/>
 {/*                <button onClick={showHandler}>Show me todos</button>
