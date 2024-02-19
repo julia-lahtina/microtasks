@@ -1,22 +1,18 @@
-import React, {ChangeEvent, RefObject} from 'react';
+import React, {ChangeEvent} from 'react';
 
-export type InputType = {
-/*    value: string
-    callBack: (value: string) => void*/
-    newTitle: RefObject<HTMLInputElement>
-    //setNewTitle: (newTitle: string) => void
+type InputPropsType = {
+    newBookTitle: string
+    setNewBookTitle: (newBookTitle: string) => void
 }
-export const Input = (props: InputType) => {
 
-/*    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-       props.setNewTitle(e.currentTarget.value)
-    }*/
+export const Input = (props: InputPropsType) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        props.newBookTitle = e.currentTarget.value;
+        props.setNewBookTitle(props.newBookTitle);
+        console.log(props.newBookTitle)
+    }
 
     return (
-        <input
-            ref={props.newTitle}
-            //onChange={onChangeHandler}
-            //value={props.newTitle} type="text"
-        />
+        <input value={props.newBookTitle} onChange={handleChange} type="text"/>
     );
 };
