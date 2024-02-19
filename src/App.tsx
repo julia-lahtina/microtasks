@@ -82,6 +82,7 @@ function App() {
 
     return (
         <div className="App">
+            <h1>{newBookTitle}</h1>
             <h2>Выберите интересующий Вас продукт:</h2>
             <div>
                 <Input newBookTitle={newBookTitle} setNewBookTitle={setNewBookTitle}/>
