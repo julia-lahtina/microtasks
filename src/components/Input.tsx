@@ -7,9 +7,8 @@ type InputPropsType = {
 
 export const Input = (props: InputPropsType) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        props.newBookTitle = e.currentTarget.value;
-        props.setNewBookTitle(props.newBookTitle);
-        console.log(props.newBookTitle)
+        const newTitle  = e.currentTarget.value;
+        props.setNewBookTitle(newTitle)
     }
 
     return (
