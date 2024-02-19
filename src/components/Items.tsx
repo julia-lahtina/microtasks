@@ -1,8 +1,9 @@
 import React from 'react';
 import {Item} from './Item';
+import {BooksType} from '../App';
 
-export const Items = () => {
+export const Items = (props: BooksType) => {
     return (
-        <Item/>
+        <Item books={props.books}/>
     );
 };
