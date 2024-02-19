@@ -1,91 +1,70 @@
-import React, {Fragment, useEffect, useRef, useState} from 'react';
+import React from 'react';
 import './App.css';
-import {json} from 'node:stream/consumers';
-import {Button} from './components/Button';
-import {Input} from './components/Input';
+import {Items} from './components/Items';
 
-type TodosType = {
-    userId: number
+export type BookPropsType = {
     id: number
     title: string
-    completed: boolean
+    author: string
+    nameOfBook: string
+    yearOfPublishing: number
+    isChecked: boolean
+}
+
+export type BooksType = {
+    books: BookPropsType[]
 }
 
 function App() {
 
-    const [todos, setTodos] = useState<TodosType[]>([])
+    const books= [
+        {
+            id: 1,
+            title: 'Klassik',
+            author: 'Griboedov',
+            nameOfBook: 'Gore ot uma',
+            yearOfPublishing: 1825,
+            isChecked: true
+        },
+        {
+            id: 2,
+            title: 'Roman',
+            author: 'Basset',
+            nameOfBook: 'Blablabla',
+            yearOfPublishing: 2003,
+            isChecked: false
+        },
+        {
+            id: 3,
+            title: 'Horror',
+            author: 'King',
+            nameOfBook: 'Door',
+            yearOfPublishing: 1999,
+            isChecked: true
+        },
+        {
+            id: 4,
+            title: 'Klassik',
+            author: 'Tolstoj',
+            nameOfBook: 'Voina i mir',
+            yearOfPublishing: 1869,
+            isChecked: false
+        },
+        {
+            id: 5,
+            title: 'Roman',
+            author: 'Basset',
+            nameOfBook: 'Blablabla2',
+            yearOfPublishing: 2020,
+            isChecked: true
+        },
 
-    console.log(todos)
-
-    /*    const [newTitle, setNewTitle] = useState('')*/
-
-    const newTitle = useRef<HTMLInputElement>(null) //local state useRef
-
-
-    const fetschTodos = () => {
-        fetch('https://jsonplaceholder.typicode.com/todos')
-            .then(response => response.json())
-            .then(json => setTodos(json))
-    }
-
-    useEffect(() => {
-        console.log('vse propalo')
-        fetschTodos()
-    }, [])  //-------> если в [] положить todos, useEffect будет следить за переменной todos, если в ней произошло 5 изменений, useEffect 5 раз запустится, отрисуется
-
-    //очень часто useEffect работет в связке с useState
-
-
-    const showHandler = () => {
-        fetschTodos()
-    }
-
-    const hideHandler = () => {
-        setTodos([])
-    }
-
-
-    const addMessage = () => {
-        if (newTitle.current) {
-            const newMessage = {
-                userId: 666,
-                id: todos.length + 1,
-                title: newTitle.current.value,
-                completed: true
-            }
-            setTodos([...todos, newMessage])
-            newTitle.current.value = ''
-        }
-    }
-
+    ]
 
     return (
         <div className="App">
-            <div>
-                <div>
-                    <Input
-                        newTitle={newTitle}
-                        //setNewTitle={setNewTitle}
-                    />
-                    <Button title={'ADD'} onClick={addMessage}/>
-                </div>
-
-                <Button title={'Show me todos'} onClick={showHandler}/>
-                <Button title={'Hide me todos'} onClick={hideHandler}/>
-                {/*                <button onClick={showHandler}>Show me todos</button>
-                <button onClick={hideHandler}>Hide me todos</button>*/}
-            </div>
-            <ul>
-                {todos.map((el: TodosType, index) => {
-                    return (
-                        <li key={index}>
-                            <input type="checkbox" checked={el.completed}/>
-                            <span>{el.id}</span>
-                            <span>{el.title}</span>
-                        </li>
-                    )
-                })}
-            </ul>
+            <h2>Выберите интересующий Вас продукт:</h2>
+            <Items/>
         </div>
     );
 }
