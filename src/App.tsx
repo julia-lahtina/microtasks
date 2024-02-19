@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Items} from './components/Items';
 import {Button} from './components/Button';
+import {Input} from './components/Input';
 
 export type BookPropsType = {
     id: number
@@ -16,9 +17,10 @@ export type BooksType = {
     books: BookPropsType[]
 }
 
+
 function App() {
 
-    const books= [
+    const [books, setBooks] = useState<BookPropsType[]>([
         {
             id: 1,
             title: 'Klassik',
@@ -59,19 +61,25 @@ function App() {
             yearOfPublishing: 2020,
             isChecked: true
         },
+    ])
 
-    ]
+    const [newBookTitle, setNewBookTitle] = useState('')
 
 
-    function openBooksButton() {
-
+    function addBook() {
+        const newBook = newBookTitle
+        setBooks([newBook, ...books])
+        setNewBookTitle('')
     }
 
 
     return (
         <div className="App">
             <h2>Выберите интересующий Вас продукт:</h2>
-            <Button nameBtn={'OPEN'} callBack={openBooksButton}/>
+            <div>
+                <Input newBookTitle={newBookTitle} setNewBookTitle={setNewBookTitle}/>
+                <Button nameBtn={'+'} callBack={addBook}/>
+            </div>
             <Items books={books}/>
         </div>
     );
