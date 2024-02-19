@@ -67,7 +67,14 @@ function App() {
 
 
     function addBook() {
-        const newBook = newBookTitle
+        const newBook = {
+            id: 6,
+            title: '',
+            author: '',
+            nameOfBook: newBookTitle,
+            yearOfPublishing: 0,
+            isChecked: false
+        }
         setBooks([newBook, ...books])
         setNewBookTitle('')
     }
