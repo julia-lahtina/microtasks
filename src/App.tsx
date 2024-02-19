@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Items} from './components/Items';
+import {Button} from './components/Button';
 
 export type BookPropsType = {
     id: number
@@ -61,10 +62,17 @@ function App() {
 
     ]
 
+
+    function openBooksButton() {
+
+    }
+
+
     return (
         <div className="App">
             <h2>Выберите интересующий Вас продукт:</h2>
-            <Items/>
+            <Button nameBtn={'OPEN'} callBack={openBooksButton}/>
+            <Items books={books}/>
         </div>
     );
 }
