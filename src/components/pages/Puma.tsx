@@ -15,7 +15,7 @@ export type PumaItem = {
 
 export const pumaArr: PumaItem[] = [
     {
-        id: 0,
+        id: 1,
         model: 'Puma ADIFOM',
         collection: 'new collection1',
         price: '10020$',
@@ -23,14 +23,14 @@ export const pumaArr: PumaItem[] = [
 
     },
     {
-        id: 1,
+        id: 2,
         model: 'Puma SUPER',
         collection: 'new collection22',
         price: '20030$',
         picture: pumaModel2
     },
     {
-        id: 2,
+        id: 3,
         model: 'Puma SUPER',
         collection: 'new collection333',
         price: '30000$',
