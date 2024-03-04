@@ -34,11 +34,11 @@ function App() {
                         <Route path={PATH.PAGE1} element={<Adidas/>}/>
                         <Route path={PATH.PAGE2} element={<Puma/>}/>
                         <Route path={PATH.PAGE3} element={<PageThree/>}/>
+                        <Route path={'/adidas/:id'} element={<Model/>}/>
+                        <Route path={'/puma/:id'} element={<ModelPuma/>}/>
 
                         <Route path={'/*'} element={<Error404/>}/>
 
-                        <Route path={'/adidas/:id'} element={<Model/>}/>
-                        <Route path={'/puma/:id'} element={<ModelPuma/>}/>
 
 {/*                        <Route path={PATH.ERROR} element={<Error404/>}/>
                         <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>*/}
