@@ -5,16 +5,22 @@ import {adidasArr} from './Adidas';
 export const Model = () => {
 
     const params = useParams()
-    console.log(params)
+    const currentModel = adidasArr.find(el => el.id === Number(params.id));
 
     return (
         <div>
-            <h2>{adidasArr[Number(params.id)].model}</h2>
-            <h4>{adidasArr[Number(params.id)].collection}</h4>
-            <h3>{adidasArr[Number(params.id)].price}</h3>
-            <img
-                src={adidasArr[Number(params.id)].picture}
-                alt={adidasArr[Number(params.id)].model}/>
+            {currentModel
+                ? <>
+                    <h2>{currentModel.model}</h2>
+                    <h4>{currentModel.collection}</h4>
+                    <h3>{currentModel.price}</h3>
+                    <img
+                        src={currentModel.picture}
+                        alt={currentModel.model}/>
+                </>
+                : <h2>Такой модели не существует</h2>
+            }
+
         </div>
     );
 };
